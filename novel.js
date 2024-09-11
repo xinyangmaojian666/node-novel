@@ -1,11 +1,12 @@
 const axios = require('axios')
 const cheerio = require('cheerio')
 
-const fetch = url => {
-  axios
-    .get(url)
-    .then(res => {
-      // 使用 Cheerio 加载 HTML
+const fetch = async url => {
+  const res=await axios.get(url)    .catch(error => {
+      console.error('Error fetching the URL:', error)
+    })
+  
+     // 使用 Cheerio 加载 HTML
       const $ = cheerio.load(res.data)
 
       // 找到 ID 为 'list' 的 div 下的所有 a 标签
@@ -15,10 +16,8 @@ const fetch = url => {
       links.each((index, element) => {
         console.log($(element).attr('href'))
       })
-    })
-    .catch(error => {
-      console.error('Error fetching the URL:', error)
-    })
+    
+
 }
 
 module.exports = { fetch }
