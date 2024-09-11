@@ -1,7 +1,7 @@
 const axios = require('axios')
 const cheerio = require('cheerio')
 
-const fetch = async url => {
+const fetch = async (url,chapter) => {
   const res=await axios.get(url)    .catch(error => {
       console.error('Error fetching the URL:', error)
     })
